@@ -1,5 +1,6 @@
 package com.bookstore.entity;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="BookDetails")
-public class BookDetails{
+public class BookDetails implements Serializable{
 	 @Id
      @Column(name="bookId")
      @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_seq")
@@ -45,14 +46,19 @@ public class BookDetails{
 	@JoinColumn(name = "bookid")
 	private List<Review> review;
 	
+
+	@OneToMany( cascade = CascadeType.ALL)
+	@JoinColumn(name = "bookid")
+	private List<OrderInfo> order;
+	
 	public BookDetails() {
 		
 	}
 
 	public BookDetails(int bookid, @Size(min = 5, max = 30) String title, @Size(min = 5, max = 64) String author,
-			@Size(min = 200, max = 2000) String description, @Size(min = 10, max = 15) String iSBN, byte[] image,
-			 double price, String publishdate, int availablebooks, List<Review> review) {
-		
+			@Size(min = 10, max = 2000) String description, @Size(min = 5, max = 15) String iSBN, byte[] image,
+			double price, String publishdate, int availablebooks, List<Review> review, List<OrderInfo> order) {
+		super();
 		this.bookid = bookid;
 		this.title = title;
 		this.author = author;
@@ -63,6 +69,7 @@ public class BookDetails{
 		this.publishdate = publishdate;
 		this.availablebooks = availablebooks;
 		this.review = review;
+		this.order = order;
 	}
 
 	public int getBookid() {
@@ -145,12 +152,21 @@ public class BookDetails{
 		this.review = review;
 	}
 
+	public List<OrderInfo> getOrder() {
+		return order;
+	}
+
+	public void setOrder(List<OrderInfo> order) {
+		this.order = order;
+	}
+
 	@Override
 	public String toString() {
 		return "BookDetails [bookid=" + bookid + ", title=" + title + ", author=" + author + ", description="
 				+ description + ", iSBN=" + iSBN + ", image=" + Arrays.toString(image) + ", price=" + price
-				+ ", publishdate=" + publishdate + ", availablebooks=" + availablebooks + ", review=" + review + "]";
+				+ ", publishdate=" + publishdate + ", availablebooks=" + availablebooks + ", review=" + review
+				+ ", order=" + order + "]";
 	}
-	
+
 	
 }

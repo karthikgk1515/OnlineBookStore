@@ -4,13 +4,18 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.bookstore.entity.BookDetails;
 import com.bookstore.entity.Category;
 import com.bookstore.exception.NotFoundException;
 import com.bookstore.repository.CategoryRepository;
 
+@Service
+@Transactional
 public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired

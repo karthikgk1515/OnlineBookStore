@@ -2,6 +2,7 @@ package com.bookstore.service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -30,14 +31,16 @@ public class BookServiceImpl implements BookService{
 
 	static  Logger logger=LoggerFactory.getLogger(BookServiceImpl.class);
 	@Override
-	public List<BookDetails> addBook(String cname, List<BookDetails> book)  {
-		for(BookDetails b:book) {
+	public List<BookDetails> addBook(String cname, List<BookDetails> books)  {
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-dd-MM");
+		for(BookDetails book:books)
+		{
 		try {
-		 sdf.parse(b.getPublishdate());
+		 sdf.parse(book.getPublishdate());
 		} catch (ParseException e) {
 			e.getStackTrace();
-		}}
+		}
+		}
 		Category c= cr.findById(cname).get();
 		if(c==null)
 		{
@@ -45,9 +48,10 @@ public class BookServiceImpl implements BookService{
 		}
 		else
 		{
-			List<BookDetails> b1= br.saveAll(book);
-			c.setBook(b1);
-			return b1;
+			br.saveAll(books);
+			List<BookDetails> b1=c.getBook();
+			b1.addAll(books);
+			return books;
 		}
 			
 	}

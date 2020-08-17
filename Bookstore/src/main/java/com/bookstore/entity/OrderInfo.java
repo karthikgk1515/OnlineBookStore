@@ -1,17 +1,14 @@
 package com.bookstore.entity;
 
 
-import java.util.List;
 
-import javax.persistence.CascadeType;
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -21,10 +18,10 @@ import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name="OrderInfo")
-public class OrderInfo {
+public class OrderInfo implements Serializable {
 	
 @Id
-@Column(name="orderId")
+@Column(name="orderid")
 @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_seq")
 @SequenceGenerator(sequenceName = "order_sequence", allocationSize = 10, name = "order_seq")
 private int orderId;
@@ -49,9 +46,6 @@ private String orderStatus;
 @Length(min=2, max=16)
 private String paymentMethod;
 
-@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-@JoinColumn(name = "orderId", referencedColumnName = "orderId")
-private List<BookDetails> book;
 
 @OneToOne
 private Customer customer;
@@ -62,15 +56,14 @@ public OrderInfo() {
 
 public OrderInfo(int orderId, int quantity, float subTotal, float total, String orderStatus,
 		@NotEmpty(message = "PaymentMethod is mandatory") @Length(min = 2, max = 16) String paymentMethod,
-		List<BookDetails> book, Customer customer) {
-	
+		Customer customer) {
+	super();
 	this.orderId = orderId;
 	this.quantity = quantity;
 	this.subTotal = subTotal;
 	this.total = total;
 	this.orderStatus = orderStatus;
 	this.paymentMethod = paymentMethod;
-	this.book = book;
 	this.customer = customer;
 }
 
@@ -122,14 +115,6 @@ public void setPaymentMethod(String paymentMethod) {
 	this.paymentMethod = paymentMethod;
 }
 
-public List<BookDetails> getBook() {
-	return book;
-}
-
-public void setBook(List<BookDetails> book) {
-	this.book = book;
-}
-
 public Customer getCustomer() {
 	return customer;
 }
@@ -141,10 +126,8 @@ public void setCustomer(Customer customer) {
 @Override
 public String toString() {
 	return "OrderInfo [orderId=" + orderId + ", quantity=" + quantity + ", subTotal=" + subTotal + ", total=" + total
-			+ ", orderStatus=" + orderStatus + ", paymentMethod=" + paymentMethod + ", book=" + book + ", customer="
-			+ customer + "]";
+			+ ", orderStatus=" + orderStatus + ", paymentMethod=" + paymentMethod + ", customer=" + customer + "]";
 }
-
 
 
 }

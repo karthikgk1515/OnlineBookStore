@@ -53,7 +53,7 @@ class BookServiceImplTest {
 			review.add(r1);
 			review.add(r2);
 			List<BookDetails> book=new ArrayList<>();
-			BookDetails book1=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",null,800,"21-07-2012",200,review);
+			BookDetails book1=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",null,800,"21-07-2012",200,review,null);
 			book.add(book1);
 			assertEquals(24,book.get(0).getBookid());
 		}
@@ -66,7 +66,7 @@ class BookServiceImplTest {
 			review.add(r1);
 			review.add(r2);
 			List<BookDetails> book=new ArrayList<>();
-			BookDetails book1=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",null,800,"21-07-2012",200,review);
+			BookDetails book1=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",null,800,"21-07-2012",200,review,null);
 			book.add(book1);
 			assertEquals(26,book.get(0).getBookid());
 		}
@@ -98,7 +98,7 @@ class BookServiceImplTest {
 			Review r2=new Review(102, 5, "I read this in the stock room at work because I couldn’t put it down"," Nice book");
 			review.add(r1);
 			review.add(r2);
-			BookDetails book=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",null,800,"21-07-2012",200,review);
+			BookDetails book=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",null,800,"21-07-2012",200,review,null);
 			bdao.deleteById(24);
 	        verify(bdao,times(1)).deleteById(24);
 		}
@@ -112,7 +112,7 @@ class BookServiceImplTest {
 			review.add(r1);
 			review.add(r2);
 			List<BookDetails> book=new ArrayList<>();
-			BookDetails book1=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",null,800,"21-07-2012",200,review);
+			BookDetails book1=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",null,800,"21-07-2012",200,review,null);
 			book.add(book1);
 			bookService.listBook();
 			assertEquals(1,book.size());
@@ -127,7 +127,7 @@ class BookServiceImplTest {
 			review.add(r1);
 			review.add(r2);
 			List<BookDetails> book=new ArrayList<>();
-			BookDetails book1=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",null,800,"21-07-2012",200,review);
+			BookDetails book1=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",null,800,"21-07-2012",200,review,null);
 			book.add(book1);
 			bookService.listBook();
 			assertEquals(2,book.size());

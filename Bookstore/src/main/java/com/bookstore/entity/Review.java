@@ -1,5 +1,7 @@
 package com.bookstore.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +12,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="customerreview")
-public class Review {
+public class Review implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reviewno")

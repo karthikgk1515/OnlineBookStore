@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,7 @@ import com.bookstore.service.BookServiceImpl;
 
 
 @RestController
+@CrossOrigin("http://localhost:4200")
 public class BookController {
 
 	@Autowired
@@ -39,16 +41,17 @@ public class BookController {
 	static  Logger logger=LoggerFactory.getLogger(BookController.class);
 	
 	@PostMapping("/addBook/{cname}")
-	public ResponseEntity<String> addBook(@PathVariable String cname,@Valid @RequestBody List<BookDetails> book)
+	public ResponseEntity<String> addBook(@PathVariable String cname,@Valid @RequestBody List<BookDetails> books)
 	{		 
 	try{
-		    bookService.addBook(cname, book);
+		    bookService.addBook(cname, books);
 			logger.info("Add book method is accessed");
 			return new ResponseEntity<>("Book added successfully", HttpStatus.OK);
 			 } catch (DataIntegrityViolationException ex) {
 					throw new NotFoundException("ID already exists");
 				}
 	}
+	
 	
 	@PutMapping("/updateBook")
 	public ResponseEntity<String> updateBook(@Valid @RequestBody BookDetails book)
@@ -72,7 +75,6 @@ public class BookController {
 	@GetMapping("/getbook")
 	public ResponseEntity<List<BookDetails>> listBook() {    
 		List<BookDetails> book=bookService.listBook();
-		logger.info("view book method is accessed");
 		if(book.isEmpty())
 			throw new NotFoundException("No books available");
 		else

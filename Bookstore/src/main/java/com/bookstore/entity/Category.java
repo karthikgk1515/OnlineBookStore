@@ -1,4 +1,5 @@
 package com.bookstore.entity;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="category")
-public class Category {
+public class Category implements Serializable {
 	
 	@Id
 	@Size(min=5, max=30)
