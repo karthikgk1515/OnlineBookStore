@@ -2,6 +2,7 @@ package com.bookstore.service;
 
 
 import java.util.List;
+import java.util.Set;
 
 import com.bookstore.entity.BookDetails;
 
@@ -12,6 +13,6 @@ public interface BookService {
 	 void  deleteBook(int bookid);
 	 List<BookDetails> listBook();
 	 BookDetails viewBook(int bookid);
-
+	 Set<BookDetails> getBook(String title);
 
 }

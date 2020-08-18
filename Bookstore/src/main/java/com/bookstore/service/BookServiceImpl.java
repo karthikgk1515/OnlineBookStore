@@ -3,7 +3,9 @@ package com.bookstore.service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -32,15 +34,6 @@ public class BookServiceImpl implements BookService{
 	static  Logger logger=LoggerFactory.getLogger(BookServiceImpl.class);
 	@Override
 	public List<BookDetails> addBook(String cname, List<BookDetails> books)  {
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-dd-MM");
-		for(BookDetails book:books)
-		{
-		try {
-		 sdf.parse(book.getPublishdate());
-		} catch (ParseException e) {
-			e.getStackTrace();
-		}
-		}
 		Category c= cr.findById(cname).get();
 		if(c==null)
 		{
@@ -57,12 +50,6 @@ public class BookServiceImpl implements BookService{
 	}
 	@Override
 	public BookDetails updateBook(BookDetails book){
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-dd-MM");
-		try {
-		 sdf.parse(book.getPublishdate());
-		} catch (ParseException e) {
-			logger.warn("exception raised",e);
-		}
 	BookDetails b=br.findById(book.getBookid()).get();
 	if(b==null)
 		throw new NotFoundException("Book not found");
@@ -95,5 +82,20 @@ public class BookServiceImpl implements BookService{
 		return br.findById(bookid).get();
 	}
 	
+	@Override
+	public Set<BookDetails> getBook(String title)
+	{
+		Set<BookDetails> b=new HashSet<>();
+			List<String> titles=br.findByTitle();
+			for(String c1:titles)
+			{
+				if(c1.equalsIgnoreCase(title))
+				{
+					Set<BookDetails> b1= br.findByBook(c1);
+			b.addAll(b1);
+			}
+			}
+		return b;
+	}
 
 }

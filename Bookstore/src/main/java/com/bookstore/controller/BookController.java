@@ -92,6 +92,16 @@ public class BookController {
 			return new ResponseEntity<>(book, HttpStatus.OK);		
 	}
 	
+	@GetMapping("/getBook/{title}")
+	public ResponseEntity<Set<BookDetails>> getBook(@PathVariable String title){    
+		Set<BookDetails> book=bookService.getBook(title);
+		logger.info("view book with parameter bookid method is accessed");
+		if(book==null)
+			throw new NotFoundException("No books available ");
+		else
+			return new ResponseEntity<>(book, HttpStatus.OK);		
+	}
+	
 	
 	
 	

@@ -1,6 +1,6 @@
 package com.bookstore.entity;
 
-import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,9 +17,11 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name="BookDetails")
-public class BookDetails implements Serializable{
+public class BookDetails{
 	 @Id
      @Column(name="bookId")
      @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_seq")
@@ -37,7 +39,9 @@ public class BookDetails implements Serializable{
 	
 	private double price;
 	
-	private String publishdate;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
+	private LocalDate publishdate;
 	
 	private int availablebooks;
 	
@@ -57,7 +61,7 @@ public class BookDetails implements Serializable{
 
 	public BookDetails(int bookid, @Size(min = 5, max = 30) String title, @Size(min = 5, max = 64) String author,
 			@Size(min = 10, max = 2000) String description, @Size(min = 5, max = 15) String iSBN, byte[] image,
-			double price, String publishdate, int availablebooks, List<Review> review, List<OrderInfo> order) {
+			double price, LocalDate publishdate, int availablebooks, List<Review> review, List<OrderInfo> order) {
 		super();
 		this.bookid = bookid;
 		this.title = title;
@@ -71,6 +75,7 @@ public class BookDetails implements Serializable{
 		this.review = review;
 		this.order = order;
 	}
+
 
 	public int getBookid() {
 		return bookid;
@@ -128,11 +133,11 @@ public class BookDetails implements Serializable{
 		this.price = price;
 	}
 
-	public String getPublishdate() {
+	public LocalDate getPublishdate() {
 		return publishdate;
 	}
 
-	public void setPublishdate(String publishdate) {
+	public void setPublishdate(LocalDate publishdate) {
 		this.publishdate = publishdate;
 	}
 

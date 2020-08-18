@@ -2,8 +2,6 @@ package com.bookstore.entity;
 
 
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,10 +16,9 @@ import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name="OrderInfo")
-public class OrderInfo implements Serializable {
+public class OrderInfo {
 	
 @Id
-@Column(name="orderid")
 @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_seq")
 @SequenceGenerator(sequenceName = "order_sequence", allocationSize = 10, name = "order_seq")
 private int orderId;
@@ -47,16 +44,13 @@ private String orderStatus;
 private String paymentMethod;
 
 
-@OneToOne
-private Customer customer;
 
 public OrderInfo() {
 	
 }
 
 public OrderInfo(int orderId, int quantity, float subTotal, float total, String orderStatus,
-		@NotEmpty(message = "PaymentMethod is mandatory") @Length(min = 2, max = 16) String paymentMethod,
-		Customer customer) {
+		@NotEmpty(message = "PaymentMethod is mandatory") @Length(min = 2, max = 16) String paymentMethod) {
 	super();
 	this.orderId = orderId;
 	this.quantity = quantity;
@@ -64,7 +58,6 @@ public OrderInfo(int orderId, int quantity, float subTotal, float total, String 
 	this.total = total;
 	this.orderStatus = orderStatus;
 	this.paymentMethod = paymentMethod;
-	this.customer = customer;
 }
 
 public int getOrderId() {
@@ -115,19 +108,13 @@ public void setPaymentMethod(String paymentMethod) {
 	this.paymentMethod = paymentMethod;
 }
 
-public Customer getCustomer() {
-	return customer;
-}
-
-public void setCustomer(Customer customer) {
-	this.customer = customer;
-}
-
 @Override
 public String toString() {
 	return "OrderInfo [orderId=" + orderId + ", quantity=" + quantity + ", subTotal=" + subTotal + ", total=" + total
-			+ ", orderStatus=" + orderStatus + ", paymentMethod=" + paymentMethod + ", customer=" + customer + "]";
+			+ ", orderStatus=" + orderStatus + ", paymentMethod=" + paymentMethod + "]";
 }
+
+
 
 
 }
