@@ -1,8 +1,5 @@
 package com.bookstore.service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -29,6 +26,7 @@ public class BookServiceImpl implements BookService{
 	
 	@Autowired
 	CategoryRepository cr;
+	
 	
 
 	static  Logger logger=LoggerFactory.getLogger(BookServiceImpl.class);
@@ -57,7 +55,6 @@ public class BookServiceImpl implements BookService{
 		b.setAuthor(book.getAuthor());
 		b.setAvailablebooks(book.getAvailablebooks());
 		b.setDescription(book.getDescription());
-		b.setImage(book.getImage());
 		b.setiSBN(book.getiSBN());
 		b.setPrice(book.getPrice());
 		b.setPublishdate(book.getPublishdate());
@@ -77,25 +74,23 @@ public class BookServiceImpl implements BookService{
 	 return br.findAll();
 	}
 	
-	@Override
-	public BookDetails viewBook(int bookid) {
-		return br.findById(bookid).get();
-	}
 	
 	@Override
 	public Set<BookDetails> getBook(String title)
 	{
 		Set<BookDetails> b=new HashSet<>();
-			List<String> titles=br.findByTitle();
+		List<String> titles=br.findByTitle();
 			for(String c1:titles)
 			{
 				if(c1.equalsIgnoreCase(title))
 				{
-					Set<BookDetails> b1= br.findByBook(c1);
-			b.addAll(b1);
+					b.addAll(br.findByBook(c1));
 			}
 			}
+		if(b.isEmpty())
+			throw new NotFoundException("book not found");
 		return b;
 	}
+	
 
 }

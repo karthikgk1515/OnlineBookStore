@@ -69,6 +69,9 @@ public class CategoryServiceImpl implements CategoryService {
 			}
 			}
 		}
-		return b;
+		if(b.isEmpty())
+			 throw new NotFoundException("No books available in this category");
+		
+			return b;
 	}
 }

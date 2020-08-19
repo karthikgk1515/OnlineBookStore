@@ -1,7 +1,6 @@
 package com.bookstore.entity;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -35,7 +34,6 @@ public class BookDetails{
 	private String description;
 	@Size(min=5, max=15)
 	private String iSBN;
-	private byte[] image;
 	
 	private double price;
 	
@@ -60,22 +58,20 @@ public class BookDetails{
 	}
 
 	public BookDetails(int bookid, @Size(min = 5, max = 30) String title, @Size(min = 5, max = 64) String author,
-			@Size(min = 10, max = 2000) String description, @Size(min = 5, max = 15) String iSBN, byte[] image,
-			double price, LocalDate publishdate, int availablebooks, List<Review> review, List<OrderInfo> order) {
+			@Size(min = 10, max = 2000) String description, @Size(min = 5, max = 15) String iSBN, double price,
+			LocalDate publishdate, int availablebooks, List<Review> review, List<OrderInfo> order) {
 		super();
 		this.bookid = bookid;
 		this.title = title;
 		this.author = author;
 		this.description = description;
 		this.iSBN = iSBN;
-		this.image = image;
 		this.price = price;
 		this.publishdate = publishdate;
 		this.availablebooks = availablebooks;
 		this.review = review;
 		this.order = order;
 	}
-
 
 	public int getBookid() {
 		return bookid;
@@ -115,14 +111,6 @@ public class BookDetails{
 
 	public void setiSBN(String iSBN) {
 		this.iSBN = iSBN;
-	}
-
-	public byte[] getImage() {
-		return image;
-	}
-
-	public void setImage(byte[] image) {
-		this.image = image;
 	}
 
 	public double getPrice() {
@@ -168,9 +156,8 @@ public class BookDetails{
 	@Override
 	public String toString() {
 		return "BookDetails [bookid=" + bookid + ", title=" + title + ", author=" + author + ", description="
-				+ description + ", iSBN=" + iSBN + ", image=" + Arrays.toString(image) + ", price=" + price
-				+ ", publishdate=" + publishdate + ", availablebooks=" + availablebooks + ", review=" + review
-				+ ", order=" + order + "]";
+				+ description + ", iSBN=" + iSBN + ", price=" + price + ", publishdate=" + publishdate
+				+ ", availablebooks=" + availablebooks + ", review=" + review + ", order=" + order + "]";
 	}
 
 	

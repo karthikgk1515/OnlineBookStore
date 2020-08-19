@@ -55,7 +55,7 @@ class BookServiceImplTest {
 			review.add(r1);
 			review.add(r2);
 			List<BookDetails> book=new ArrayList<>();
-			BookDetails book1=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",null,800,LocalDate.parse("2020-09-08",DateTimeFormatter.ofPattern("dd/MM/yyyy")),200,review,null);
+			BookDetails book1=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",800,LocalDate.parse("2020-09-08",DateTimeFormatter.ofPattern("dd/MM/yyyy")),200,review,null);
 			book.add(book1);
 			assertEquals(24,book.get(0).getBookid());
 		}
@@ -68,7 +68,7 @@ class BookServiceImplTest {
 			review.add(r1);
 			review.add(r2);
 			List<BookDetails> book=new ArrayList<>();
-			BookDetails book1=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",null,800,LocalDate.parse("2020-09-08",DateTimeFormatter.ofPattern("dd/MM/yyyy")),200,review,null);
+			BookDetails book1=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",800,LocalDate.parse("2020-09-08",DateTimeFormatter.ofPattern("dd/MM/yyyy")),200,review,null);
 			book.add(book1);
 			assertEquals(26,book.get(0).getBookid());
 		}
@@ -85,7 +85,6 @@ class BookServiceImplTest {
 			b.setAuthor("Paul Rudd");
 			b.setAvailablebooks(200);
 			b.setDescription("Aeronautical engineering");
-			b.setImage(null);
 			b.setiSBN("978-3-16-148410-0");
 			b.setPrice(800);
 			b.setPublishdate(LocalDate.parse("2020-09-08",DateTimeFormatter.ofPattern("dd/MM/yyyy")));
@@ -100,7 +99,7 @@ class BookServiceImplTest {
 			Review r2=new Review(102, 5, "I read this in the stock room at work because I couldn’t put it down"," Nice book");
 			review.add(r1);
 			review.add(r2);
-			BookDetails book=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",null,800,LocalDate.parse("2020-09-08",DateTimeFormatter.ofPattern("dd/MM/yyyy")),200,review,null);
+			BookDetails book=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",800,LocalDate.parse("2020-09-08",DateTimeFormatter.ofPattern("dd/MM/yyyy")),200,review,null);
 			bdao.deleteById(24);
 	        verify(bdao,times(1)).deleteById(24);
 		}
@@ -114,7 +113,7 @@ class BookServiceImplTest {
 			review.add(r1);
 			review.add(r2);
 			List<BookDetails> book=new ArrayList<>();
-			BookDetails book1=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",null,800,LocalDate.parse("2020-09-08",DateTimeFormatter.ofPattern("dd/MM/yyyy")),200,review,null);
+			BookDetails book1=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",800,LocalDate.parse("2020-09-08",DateTimeFormatter.ofPattern("dd/MM/yyyy")),200,review,null);
 			book.add(book1);
 			bookService.listBook();
 			assertEquals(1,book.size());
@@ -129,7 +128,7 @@ class BookServiceImplTest {
 			review.add(r1);
 			review.add(r2);
 			List<BookDetails> book=new ArrayList<>();
-			BookDetails book1=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",null,800,LocalDate.parse("2020-09-08",DateTimeFormatter.ofPattern("dd/MM/yyyy")),200,review,null);
+			BookDetails book1=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",800,LocalDate.parse("2020-09-08",DateTimeFormatter.ofPattern("dd/MM/yyyy")),200,review,null);
 			book.add(book1);
 			bookService.listBook();
 			assertEquals(2,book.size());
