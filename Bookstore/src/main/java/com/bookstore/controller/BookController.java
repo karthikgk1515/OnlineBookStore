@@ -65,7 +65,7 @@ public class BookController {
 	@GetMapping("/getBook/{title}")
 	public ResponseEntity<Set<BookDetails>> getBook(@PathVariable String title){    
 		Set<BookDetails> book=bookService.getBook(title);
-		logger.info("view book with parameter bookid method is accessed");
+		logger.info("view book using bookid method is accessed");
 			return new ResponseEntity<>(book, HttpStatus.OK);		
 	}
 	
