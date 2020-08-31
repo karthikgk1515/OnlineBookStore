@@ -12,11 +12,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -52,25 +50,6 @@ public class BookController {
 				}
 	}
 	
-	
-	@PutMapping("/updateBook")
-	public ResponseEntity<String> updateBook(@Valid @RequestBody BookDetails book)
-			{
-			BookDetails b=bookService.updateBook( book);
-			logger.info("Update book method is accessed");
-			if(b==null)
-				 throw new NotFoundException("Book not found");
-			
-			return new ResponseEntity<>("Book updated successfully", HttpStatus.OK);
-	}
-	
-	
-	@DeleteMapping("/removeBook/{bookid}")
-	public ResponseEntity<String> removeBook(@PathVariable int bookid)  {
-			 bookService.deleteBook(bookid);
-			 logger.warn("Delete method is accessed");
-			return new ResponseEntity<>("Book deleted successfully", HttpStatus.OK);
-	}
 	
 	@GetMapping("/getbook")
 	public ResponseEntity<List<BookDetails>> listBook() {    
@@ -108,24 +87,6 @@ public class BookController {
 				}
 	}
 	
-	@PutMapping("/updateCategory")
-	public ResponseEntity<String> updateCategory(@RequestBody Category category) 
-	{
-		Category c= categoryService.updateCategory(category);
-		logger.info("update category method is accessed");
-		if(c==null)
-			throw new NotFoundException("Category not found");
-		else
-			return new ResponseEntity<>("Category updated successfully", HttpStatus.OK);
-	}
-	
-	
-	@DeleteMapping("/removeCategory/{category}")
-	public ResponseEntity<String> removeCategory(@PathVariable String category) {
-			 categoryService.deleteCategory(category);
-			 logger.warn("removecategory method is accessed");
-			return new ResponseEntity<>("Category deleted successfully", HttpStatus.OK);
-	}
 	
 	@GetMapping("/getCategory")
 	public ResponseEntity<List<Category>> listCategory(){    

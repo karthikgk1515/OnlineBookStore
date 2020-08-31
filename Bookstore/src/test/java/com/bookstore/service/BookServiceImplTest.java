@@ -55,7 +55,7 @@ class BookServiceImplTest {
 			review.add(r1);
 			review.add(r2);
 			List<BookDetails> book=new ArrayList<>();
-			BookDetails book1=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",800,LocalDate.parse("2020-09-08",DateTimeFormatter.ofPattern("dd/MM/yyyy")),200,review,null);
+			BookDetails book1=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",800,LocalDate.now(),200,review,null);
 			book.add(book1);
 			assertEquals(24,book.get(0).getBookid());
 		}
@@ -68,41 +68,12 @@ class BookServiceImplTest {
 			review.add(r1);
 			review.add(r2);
 			List<BookDetails> book=new ArrayList<>();
-			BookDetails book1=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",800,LocalDate.parse("2020-09-08",DateTimeFormatter.ofPattern("dd/MM/yyyy")),200,review,null);
+			BookDetails book1=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",800,LocalDate.now(),200,review,null);
 			book.add(book1);
 			assertEquals(26,book.get(0).getBookid());
 		}
+	
 		
-		@Test
-		public void updateBook() {
-			BookDetails b=new BookDetails();
-			List<Review> review=new ArrayList<>();
-			Review r1= new Review(101,4,"Great start to a new series","Great Book");
-			Review r2=new Review(102, 5, "I read this in the stock room at work because I couldn’t put it down"," Nice book");
-			review.add(r1);
-			review.add(r2);
-			b.setBookid(23);
-			b.setAuthor("Paul Rudd");
-			b.setAvailablebooks(200);
-			b.setDescription("Aeronautical engineering");
-			b.setiSBN("978-3-16-148410-0");
-			b.setPrice(800);
-			b.setPublishdate(LocalDate.parse("2020-09-08",DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-			b.setReview(review);
-			b.setTitle("Aeronautics");
-			assertEquals("Paul Rudd", b.getAuthor());
-		}
-		@Test
-		public void deleteBook() {
-			List<Review> review=new ArrayList<>();
-			Review r1= new Review(101,4,"Great start to a new series","Great Book");
-			Review r2=new Review(102, 5, "I read this in the stock room at work because I couldn’t put it down"," Nice book");
-			review.add(r1);
-			review.add(r2);
-			BookDetails book=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",800,LocalDate.parse("2020-09-08",DateTimeFormatter.ofPattern("dd/MM/yyyy")),200,review,null);
-			bdao.deleteById(24);
-	        verify(bdao,times(1)).deleteById(24);
-		}
 		
 		@Test
 		public void listBook()
@@ -113,7 +84,7 @@ class BookServiceImplTest {
 			review.add(r1);
 			review.add(r2);
 			List<BookDetails> book=new ArrayList<>();
-			BookDetails book1=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",800,LocalDate.parse("2020-09-08",DateTimeFormatter.ofPattern("dd/MM/yyyy")),200,review,null);
+			BookDetails book1=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",800,LocalDate.now(),200,review,null);
 			book.add(book1);
 			bookService.listBook();
 			assertEquals(1,book.size());
@@ -128,7 +99,7 @@ class BookServiceImplTest {
 			review.add(r1);
 			review.add(r2);
 			List<BookDetails> book=new ArrayList<>();
-			BookDetails book1=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",800,LocalDate.parse("2020-09-08",DateTimeFormatter.ofPattern("dd/MM/yyyy")),200,review,null);
+			BookDetails book1=new BookDetails(24,"Aeronautics","Paul Rudd","Aeronautical engineering"," 978-3-16-148410-0",800,LocalDate.now(),200,review,null);
 			book.add(book1);
 			bookService.listBook();
 			assertEquals(2,book.size());
@@ -172,12 +143,7 @@ class BookServiceImplTest {
 		
 		  
 
-				 @Test
-				  void removeCategoryTest(){
-				 Category c=new Category("horror",null);
-				 cdao.deleteById(c.getCategoryame());
-			        verify(cdao,times(1)).deleteById(c.getCategoryame());
-				 }
+
 				 
 
 }

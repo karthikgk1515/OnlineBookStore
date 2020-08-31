@@ -17,7 +17,6 @@ public class OnlineBookStoreApplication {
 	      logger.warn("this is a warn message");
 	      logger.error("this is a error message");
 	      
-	      
 		SpringApplication.run(OnlineBookStoreApplication.class, args);
 	}
 

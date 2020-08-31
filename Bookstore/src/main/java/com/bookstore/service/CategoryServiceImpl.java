@@ -28,25 +28,6 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 	
 	@Override
-	public Category updateCategory(Category category)  {
-		Category c= cr.findById(category.getCategoryame()).get();
-		if(c!=null)
-		{
-			c.setCategoryame(category.getCategoryame());
-			return c;
-		}
-		else
-			throw new NotFoundException("Category not found");
-	}
-
-	 
-	@Override
-	public void deleteCategory(String cname)
-	{
-		cr.deleteById(cname);
-	}
-	
-	@Override
 	public List<Category> viewCategory()
 	{
 		return cr.findAll();

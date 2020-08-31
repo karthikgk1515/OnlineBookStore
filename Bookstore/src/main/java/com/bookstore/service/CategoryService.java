@@ -9,8 +9,6 @@ import com.bookstore.entity.Category;
 public interface CategoryService {
 
 	 Category addCategory(Category category);
-	 Category updateCategory(Category category) ;
-	 void deleteCategory(String cname);
 	 List<Category> viewCategory();
 	 Set<BookDetails> listBook(String category);
 }
